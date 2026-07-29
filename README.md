@@ -95,7 +95,3 @@ Open your browser at: **http://localhost:5000**
 - **Change colours**: Edit CSS variables at the top of `static/css/style.css`
 - **Update skills**: Find the skills section in `index.html` and add/remove `<span class="stag">` tags
 - **Add certifications**: Copy a `.cert-card` block in `index.html`
-
----
-
-Built with ❤️ — Chirag Deviputra, Wardha, Maharashtra 🇮🇳
