@@ -1,3 +1,34 @@
+/* ── Animated number counters ─────────────────────────────────────────────── */
+function animateCount(el, endText, duration = 1200) {
+  const match = endText.match(/^(\d+(?:\.\d+)?)/);
+  if (!match) return; // non-numeric label (e.g. "AZ") — leave as-is
+  const end = parseFloat(match[1]);
+  const suffix = endText.slice(match[1].length);
+  const isFloat = match[1].includes('.');
+  const startTime = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+    const value = end * eased;
+    el.textContent = (isFloat ? value.toFixed(1) : Math.round(value)) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const counterEls = document.querySelectorAll('.stat-val, .cgpa-val');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      animateCount(entry.target, entry.target.textContent.trim());
+    }
+  });
+}, { threshold: 0.5 });
+counterEls.forEach((el) => counterObserver.observe(el));
+
+
 /* ── Scroll fade-in ─────────────────────────────────────────────────────────── */
 const observer = new IntersectionObserver(
   (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),

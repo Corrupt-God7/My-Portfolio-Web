@@ -304,11 +304,13 @@ h1 { font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 900; line-height: 1.05; l
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group label { font-size: .82rem; color: var(--muted2); font-weight: 500; font-family: var(--mono); }
+.field-wrap { position: relative; display: block; width: 100%; }
 .form-group input,
 .form-group textarea {
   background: var(--card); border: 1px solid var(--border); border-radius: 8px;
   color: var(--text); font-family: var(--font); font-size: .9rem;
   padding: 10px 14px; transition: border-color .2s; outline: none; resize: vertical;
+  width: 100%;
 }
 .form-group input:focus,
 .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(14,165,233,.1); }
@@ -326,8 +328,6 @@ h1 { font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 900; line-height: 1.05; l
 }
 .form-group.field-focused .label-cursor { animation: blinkCursor 1s steps(1) infinite; }
 @keyframes blinkCursor { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
-
-.field-wrap { position: relative; }
 .form-group input.is-typing,
 .form-group textarea.is-typing {
   border-color: var(--accent2);
